@@ -24,6 +24,12 @@ def reset_timer():
 
 
 # ---------------------------- TIMER MECHANISM ------------------------------- # 
+def lift_window():
+    window.lift()
+    window.attributes('-topmost', True)
+    window.after_idle(window.attributes, '-topmost', False)
+
+
 def start_timer():
     global REPS
     REPS += 1
@@ -33,15 +39,11 @@ def start_timer():
     long_break_sec = LONG_BREAK_MIN * 60
 
     if REPS % 8 == 0:
-        window.lift()
-        window.attributes('-topmost', True)
-        window.after_idle(window.attributes, '-topmost', False)
+        lift_window()
         count_down(long_break_sec)
         title_label.config(text="Break", fg=RED)
     elif REPS % 2 == 0:
-        window.lift()
-        window.attributes('-topmost', True)
-        window.after_idle(window.attributes, '-topmost', False)
+        lift_window()
         count_down(short_break_sec)
         title_label.config(text="Break", fg=PINK)
     else:
